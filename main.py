@@ -37,11 +37,13 @@ class Main(KytosNApp):
 
     @rest('v1/')
     def get_controller_status(self):
+        """Return basic information from running controller."""
         status = self.controller.status()
         return json.dumps({'status': status})
 
     @rest('v1/napps')
     def get_napps_info(self):
+        """Return a list of all NApps installed and running."""
         napps = [ napp[1] for napp in self.controller.napps.items() ]
         output = []
         for napp in napps:

@@ -6,6 +6,7 @@ Provides basic information about the controller status
 from kytos.core import KytosNApp, log, rest
 
 from napps.kytos.status import settings
+from flask import jsonify
 
 import json
 
@@ -39,7 +40,7 @@ class Main(KytosNApp):
     def get_controller_status(self):
         """Return basic information from running controller."""
         status = self.controller.status()
-        return json.dumps({'status': status})
+        return jsonify({'status': status})
 
     @rest('v1/napps')
     def get_napps_info(self):
@@ -52,7 +53,7 @@ class Main(KytosNApp):
                            'description': napp.description,
                            'license': napp.license,
                            'tags': napp.tags})
-        return json.dumps({'napps': output}), 200
+        return jsonify({'napps': output})
 
     def shutdown(self):
         """This method is executed when your napp is unloaded.

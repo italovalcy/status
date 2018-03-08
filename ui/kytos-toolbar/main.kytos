@@ -1,0 +1,36 @@
+<template>
+  <div class="kytos-menu-item" icon="cube" tooltip="Napp Status">
+    <kytos-accordion>
+      <kytos-accordion-item title="Installed NApps">
+        <kytos-property-panel>
+          <kytos-property-panel-item :name="napp.name" :value="napp.version"  v-if="napps" v-for="napp in this.napps" :key="napp.name"></kytos-property-panel-item>
+        </kytos-property-panel>
+      </kytos-accordion-item>
+    <kytos-accordion>
+  </div>
+</template>
+<script>
+module.exports = {
+  methods: {
+    update_napps (){
+      var self = this
+      $.ajax({
+        async: true,
+        dataType: "json",
+        url: this.$kytos_server_api + "kytos/status/v1/napps",
+        success: function(data) {
+          self.napps = data['napps']
+        }
+      });
+    }
+  },
+  mounted: function() {
+    setTimeout(this.update_napps, 1000);
+  },
+  data: function(){
+    return {
+      napps: []
+    }
+  }
+}
+</script>

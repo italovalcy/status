@@ -3,7 +3,7 @@
   "username": "kytos",
   "name": "status",
   "description": "Provides basic information about the controller status",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "napp_dependencies": [],
   "license": "MIT",
   "tags": ["rest", "status", "information", "work-in-progress"],

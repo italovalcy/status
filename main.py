@@ -3,12 +3,9 @@
 Provides basic information about the controller status
 """
 
-from kytos.core import KytosNApp, log, rest
-
-from napps.kytos.status import settings
 from flask import jsonify
+from kytos.core import KytosNApp, rest
 
-import json
 
 class Main(KytosNApp):
     """Main class of kytos/status NApp.
@@ -27,7 +24,7 @@ class Main(KytosNApp):
         pass
 
     def execute(self):
-        """This method is executed right after the setup method execution.
+        """Procedures executed after the setup method execution.
 
         You can also use this method in loop mode if you add to the above setup
         method a line like the following example:
@@ -45,7 +42,7 @@ class Main(KytosNApp):
     @rest('v1/napps')
     def get_napps_info(self):
         """Return a list of all NApps installed and running."""
-        napps = [ napp[1] for napp in self.controller.napps.items() ]
+        napps = [napp[1] for napp in self.controller.napps.items()]
         output = []
         for napp in napps:
             output.append({'name': "{}/{}".format(napp.author, napp.name),
@@ -56,7 +53,7 @@ class Main(KytosNApp):
         return jsonify({'napps': output})
 
     def shutdown(self):
-        """This method is executed when your napp is unloaded.
+        """Shutdown the napp when the napp is unloaded.
 
         If you have some cleanup procedure, insert it here.
         """

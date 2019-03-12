@@ -1,1 +1,1 @@
-"""Settings for the status NApp."""
+"""Settings for the status NApp. """

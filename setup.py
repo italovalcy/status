@@ -1,6 +1,6 @@
 """Setup script.
 
-Run "python3 setup --help-commands" to list all available commands and their
+Run "python3 setup.py --help-commands" to list all available commands and their
 descriptions.
 """
 import os
@@ -24,13 +24,16 @@ if 'VIRTUAL_ENV' in os.environ:
 else:
     BASE_ENV = Path('/')
 
+NAPP_NAME = 'status'
+NAPP_VERSION = '1.0.1'
+
 # Kytos var folder
 VAR_PATH = BASE_ENV / 'var' / 'lib' / 'kytos'
 # Path for enabled NApps
-ENABL_PATH = VAR_PATH / 'napps'
+ENABLED_PATH = VAR_PATH / 'napps'
 # Path to install NApps
-INSTL_PATH = VAR_PATH / 'napps' / '.installed'
-CURR_DIR = Path('.').resolve()
+INSTALLED_PATH = VAR_PATH / 'napps' / '.installed'
+CURRENT_DIR = Path('.').resolve()
 
 # NApps enabled by default
 CORE_NAPPS = ['of_core']
@@ -47,15 +50,12 @@ class SimpleCommand(Command):
 
         Use *call* instead of *check_call* to ignore failures.
         """
-        pass
 
     def initialize_options(self):
         """Set default values for options."""
-        pass
 
     def finalize_options(self):
         """Post-process options."""
-        pass
 
 
 class Cleaner(SimpleCommand):
@@ -111,12 +111,12 @@ class KytosInstall:
     @staticmethod
     def enable_core_napps():
         """Enable a NAPP by creating a symlink."""
-        (ENABL_PATH / 'kytos').mkdir(parents=True, exist_ok=True)
+        (ENABLED_PATH / 'kytos').mkdir(parents=True, exist_ok=True)
         for napp in CORE_NAPPS:
             napp_path = Path('kytos', napp)
-            src = ENABL_PATH / napp_path
-            dst = INSTL_PATH / napp_path
-            src.symlink_to(dst)
+            src = ENABLED_PATH / napp_path
+            dst = INSTALLED_PATH / napp_path
+            symlink_if_different(src, dst)
 
 
 class InstallMode(install):
@@ -158,10 +158,10 @@ class DevelopMode(develop):
         """Install the package in a developer mode."""
         super().run()
         if self.uninstall:
-            shutil.rmtree(str(ENABL_PATH), ignore_errors=True)
+            shutil.rmtree(str(ENABLED_PATH), ignore_errors=True)
         else:
             self._create_folder_symlinks()
-            self._create_file_symlinks()
+            # self._create_file_symlinks()
             KytosInstall.enable_core_napps()
 
     @staticmethod
@@ -171,28 +171,40 @@ class DevelopMode(develop):
         ./napps/kytos/napp_name will generate a link in
         var/lib/kytos/napps/.installed/kytos/napp_name.
         """
-        links = INSTL_PATH / 'kytos'
+        links = INSTALLED_PATH / 'kytos'
         links.mkdir(parents=True, exist_ok=True)
-        code = CURR_DIR
-        src = links / 'status'
-        src.symlink_to(code)
+        code = CURRENT_DIR
+        src = links / NAPP_NAME
+        symlink_if_different(src, code)
 
-        (ENABL_PATH / 'kytos').mkdir(parents=True, exist_ok=True)
-        dst = ENABL_PATH / Path('kytos', 'status')
-        dst.symlink_to(src)
+        (ENABLED_PATH / 'kytos').mkdir(parents=True, exist_ok=True)
+        dst = ENABLED_PATH / Path('kytos', NAPP_NAME)
+        symlink_if_different(dst, src)
 
     @staticmethod
     def _create_file_symlinks():
         """Symlink to required files."""
-        src = ENABL_PATH / '__init__.py'
-        dst = CURR_DIR / 'napps' / '__init__.py'
-        src.symlink_to(dst)
+        src = ENABLED_PATH / '__init__.py'
+        dst = CURRENT_DIR / 'napps' / '__init__.py'
+        symlink_if_different(src, dst)
 
 
-setup(name='kytos_status',
-      version='1.1.0',
+def symlink_if_different(path, target):
+    """Force symlink creation if it points anywhere else."""
+    if not path.exists():
+        # print(f"path doesn't exist. linking...")
+        path.symlink_to(target)
+    elif not path.samefile(target):
+        # print(f"path exists, but is different. removing and linking...")
+        # Exists but points to a different file, so let's replace it
+        path.unlink()
+        path.symlink_to(target)
+
+
+setup(name=f'kytos_{NAPP_NAME}',
+      version=NAPP_VERSION,
       description='Status Napp developed by Kytos Team',
-      url='http://github.com/kytos/status',
+      url=f'http://github.com/kytos/{NAPP_NAME}',
       author='Kytos Team',
       author_email='of-ng-dev@ncc.unesp.br',
       license='MIT',

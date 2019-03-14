@@ -5,12 +5,14 @@ All notable changes to the status NApp will be documented in this file.
 
 [UNRELEASED] - Under development
 ********************************
+
 Added
 =====
 
 Changed
 =======
-
+- Allow to run linter and tests on scrutinizer.
+- Improve status napp.
 Deprecated
 ==========
 
@@ -19,19 +21,10 @@ Removed
 
 Fixed
 =====
+- Fixing linter issues and improve code organization.
 
 Security
 ========
-
-[1.1.1] - 2019-03-12
-********************
-Fixed
-=====
-- Fixing linter issues and improve code organization.
-Added
-=====
-- Improve status napp.
-- Allow to run linter and tests on scrutinizer.
 
 [1.1.0] - 2018-04-20
 ********************

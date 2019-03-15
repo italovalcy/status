@@ -1,7 +1,4 @@
-"""Main module of kytos/status Kytos Network Application.
-
-Provides basic information about the controller status
-"""
+"""Main module of kytos/status Kytos Network Application."""
 
 from flask import jsonify
 from kytos.core import KytosNApp, rest
@@ -21,7 +18,6 @@ class Main(KytosNApp):
 
         So, if you have any setup routine, insert it here.
         """
-        pass
 
     def execute(self):
         """Procedures executed after the setup method execution.
@@ -31,7 +27,6 @@ class Main(KytosNApp):
 
             self.execute_as_loop(30)  # 30-second interval.
         """
-        pass
 
     @rest('v1/')
     def get_controller_status(self):
@@ -57,4 +52,3 @@ class Main(KytosNApp):
 
         If you have some cleanup procedure, insert it here.
         """
-        pass

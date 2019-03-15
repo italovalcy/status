@@ -1,16 +1,18 @@
 #########
 Changelog
 #########
-All notable changes to the MEF_ELine NApp will be documented in this file.
+All notable changes to the status NApp will be documented in this file.
 
 [UNRELEASED] - Under development
 ********************************
+
 Added
 =====
 
 Changed
 =======
-
+- Allow to run linter and tests on scrutinizer.
+- Improve status napp.
 Deprecated
 ==========
 
@@ -19,6 +21,7 @@ Removed
 
 Fixed
 =====
+- Fixing linter issues and improve code organization.
 
 Security
 ========
@@ -27,7 +30,7 @@ Security
 ********************
 Added
 =====
-- Add Status Compontent to be displayed in the Kytos UI 
+- Add Status Compontent to be displayed in the Kytos UI .
 
 [1.0.0] - 2018-01-31
 ********************

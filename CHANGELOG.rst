@@ -7,18 +7,22 @@ All notable changes to the status NApp will be documented in this file.
 ********************************
 Added
 =====
+- Added support for automated tests and CI with Travis.
 
 Changed
 =======
+- Changed README.rst to include some info badges.
 
 Deprecated
 ==========
 
 Removed
 =======
+- Removed watchdog dependency from scrutinizer.
 
 Fixed
 =====
+- Fixed Scrutinizer coverage error.
 
 Security
 ========

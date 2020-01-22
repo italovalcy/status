@@ -2,6 +2,8 @@
 Overview
 ########
 
+|License| |Build| |Coverage| |Quality|
+
 .. attention::
 
     THIS NAPP IS STILL EXPERIMENTAL AND IT'S EVENTS, METHODS AND STRUCTURES MAY
@@ -34,3 +36,17 @@ You can find a list of the available endpoints and example input/output in the
 .. note::
 
     Working in progress here.
+
+.. TAGs
+
+.. |License| image:: https://img.shields.io/github/license/kytos/kytos.svg
+   :target: https://github.com/kytos/status/blob/master/LICENSE
+.. |Build| image:: https://scrutinizer-ci.com/g/kytos/status/badges/build.png?b=master
+  :alt: Build status
+  :target: https://scrutinizer-ci.com/g/kytos/status/?branch=master
+.. |Coverage| image:: https://scrutinizer-ci.com/g/kytos/status/badges/coverage.png?b=master
+  :alt: Code coverage
+  :target: https://scrutinizer-ci.com/g/kytos/status/?branch=master
+.. |Quality| image:: https://scrutinizer-ci.com/g/kytos/status/badges/quality-score.png?b=master
+  :alt: Code-quality score
+  :target: https://scrutinizer-ci.com/g/kytos/status/?branch=master

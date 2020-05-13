@@ -2,10 +2,8 @@
 from unittest import TestCase
 from unittest.mock import Mock
 
-from kytos.core import Controller
-from kytos.core.config import KytosConfig
-
 from napps.kytos.status.main import Main
+from tests.helpers import get_controller_mock, get_test_client
 
 
 class TestMain(TestCase):
@@ -17,7 +15,7 @@ class TestMain(TestCase):
         Set the server_name_url_url from kytos/mef_eline
         """
         self.server_name_url = 'http://localhost:8181/api/kytos/mef_eline'
-        self.napp = Main(self.get_controller_mock())
+        self.napp = Main(get_controller_mock())
 
     def test_get_event_listeners(self):
         """Verify all event listeners registered."""
@@ -33,14 +31,6 @@ class TestMain(TestCase):
             ({}, {'OPTIONS', 'GET', 'HEAD'}, '/api/kytos/status/v1/')]
         urls = self.get_napp_urls(self.napp)
         self.assertEqual(expected_urls, urls)
-
-    @staticmethod
-    def get_controller_mock():
-        """Return a controller mock."""
-        options = KytosConfig().options['daemon']
-        controller = Controller(options)
-        controller.log = Mock()
-        return controller
 
     @staticmethod
     def get_napp_urls(napp):
@@ -66,9 +56,3 @@ class TestMain(TestCase):
                 urls.append((options, rule.methods, f'{str(rule)}'))
 
         return urls
-
-    @staticmethod
-    def get_app_test_client(napp):
-        """Return a flask api test client."""
-        napp.controller.api_server.register_napp_endpoints(napp)
-        return napp.controller.api_server.app.test_client()

@@ -1,6 +1,6 @@
 """Main module of kytos/status Kytos Network Application."""
-
 from flask import jsonify
+
 from kytos.core import KytosNApp, rest
 
 

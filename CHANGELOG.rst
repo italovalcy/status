@@ -7,14 +7,33 @@ All notable changes to the status NApp will be documented in this file.
 ********************************
 Added
 =====
+
+Changed
+=======
+
+Deprecated
+==========
+
+Removed
+=======
+
+Fixed
+=====
+
+Security
+========
+
+
+[1.1.2] - 2020-07-23
+********************
+Added
+=====
+- Added unit tests, increasing coverage from 7% to 100%
 - Added support for automated tests and CI with Travis.
 
 Changed
 =======
 - Changed README.rst to include some info badges.
-
-Deprecated
-==========
 
 Removed
 =======
@@ -24,8 +43,6 @@ Fixed
 =====
 - Fixed Scrutinizer coverage error.
 
-Security
-========
 
 [1.1.1] - 2019-03-15
 ********************

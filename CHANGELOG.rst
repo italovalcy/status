@@ -23,6 +23,27 @@ Fixed
 Security
 ========
 
+
+[1.1.2] - 2020-07-23
+********************
+Added
+=====
+- Added unit tests, increasing coverage from 7% to 100%
+- Added support for automated tests and CI with Travis.
+
+Changed
+=======
+- Changed README.rst to include some info badges.
+
+Removed
+=======
+- Removed watchdog dependency from scrutinizer.
+
+Fixed
+=====
+- Fixed Scrutinizer coverage error.
+
+
 [1.1.1] - 2019-03-15
 ********************
 Added
